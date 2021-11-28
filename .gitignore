@@ -62,3 +62,4 @@ buck-out/
 # CUSTOM
 /.vscode/.react/
 msbuild.binlog
+.dccache
