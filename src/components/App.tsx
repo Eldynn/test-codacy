@@ -3,10 +3,17 @@ import React from 'react';
 import { initReactI18next } from 'react-i18next';
 import * as RNLocalize from 'react-native-localize';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as StoreProvider } from 'react-redux';
 
-import en from '../translations/en';
-import fr from '../translations/fr';
+import en from '../../translations/en';
+import fr from '../../translations/fr';
 import { Navigation } from './Navigation';
+import configureStore from '../store/configureStore';
+
+const store = configureStore({});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 const languages = {
   en,
@@ -36,9 +43,11 @@ i18n
 
 const App = () => {
   return (
-    <PaperProvider>
-      <Navigation></Navigation>
-    </PaperProvider>
+    <StoreProvider store={store}>
+      <PaperProvider>
+        <Navigation></Navigation>
+      </PaperProvider>
+    </StoreProvider>
   );
 };
 
